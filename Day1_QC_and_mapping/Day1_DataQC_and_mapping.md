@@ -5,26 +5,15 @@
 
 ![alt text](https://github.com/carlalbc/URPP_tutorials/blob/master/img/Logo_URPP_kl2.png)
 
-## Before we start: Docker Initialization:
+## Before we start: Docker setup:
 
-Before starting run the following to initialize your Ubuntu image on Docker. Please, note that you should change the directory in the example from below to where you have your ubuntu bio634.tar image file.
+Please follow instruction on https://github.com/grexor/teachingDocker to initialize your Docker environment.
 
-In the example below you would have to change:
-
-`/home/jupiter/URPP.BIO/BIO634.2020` to your directory of choice depending on your Operative System (OS). Ask us on our Slack dedicated BIO634-students channel if you have any issues.
-
-Example on how to run Docker:
-
-```sh 
-
-docker run -v /home/jupiter/URPP.BIO/BIO634.2020:/home/student/storage --hostname ubuntu --user student --workdir="/home/student" -ti bio634 bash --login
-```
-
-You should see a prompt that says:
+When successful, you should see a prompt:
 
 `student@ubuntu:~$`
 
-If that is correct, then you should be able to go from there! Now everything you do will be mirrored in the local folder  where you are running Docker from, which would facilitate for you to visualize files later.
+Now all files stored in your Docker under `/home/student/data` will be visible on your local computer in the folder you specified when running Docker. This will facilitate visualizing and exploring result files on your computer later on.
 
 ## Part I.- Data Quality Control (QC), pre-processing and mapping genomes 
 
