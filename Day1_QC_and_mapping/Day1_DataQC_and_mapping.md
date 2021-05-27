@@ -55,8 +55,8 @@ Let's get started!
 
 
 ```sh
-#Before we start, move to the "storage" folder:
-cd storage
+# Before we start, move to the "data" folder:
+cd data
 
 # 1) Make directory called mapping:
 mkdir mapping
@@ -81,18 +81,16 @@ mkdir FastQC
 ```sh 
 # Get both FASTQ PE read files from ENA and store it in the subdirectory we just created:
 
-wget http://ftp.sra.ebi.ac.uk/vol1/fastq/SRR617/003/SRR6170103/SRR6170103_1.fastq.gz && wget http://ftp.sra.ebi.ac.uk/vol1/fastq/SRR617/003/SRR6170103/SRR6170103_2.fastq.gz 
-
-#If unresponsive download it from here:
-wget https://bioinfo.evolution.uzh.ch/teaching/SRR6170103_1.fastq.gz && wget https://bioinfo.evolution.uzh.ch/teaching/SRR6170103_2.fastq.gz
+wget https://bioinfo.evolution.uzh.ch/share/data/bio634/SRR6170103_1.fastq.gz
+wget https://bioinfo.evolution.uzh.ch/share/data/bio634/SRR6170103_2.fastq.gz
 ```
 
 - Check the FASTQ files:
 
 ```sh 
-#View the file using the "less" command
+# View the file using the "less" command
 less SRR6170103_1.fastq.gz              # Exit with Ctrl+Z
-#Alternatively use
+# Alternatively use
 zcat SRR6170103_2.fastq.gz | head       #Exit with Ctrl=Z
 ``` 
 - You could use `head`(shows first 10 lines) and see what happens
@@ -135,27 +133,16 @@ Usage: fastqc seqfile1 seqfile2 .. seqfileN
 
 - We can do this either by using the graphical user interface of the program (GUI) or through the command-line (recommended). 
  
-##### Graphical User Interface (GUI) - option 1 (SKIP THIS WITH DOCKER):
-
-```sh
-#Open the GUI of FastQC by typing fastqc in the command-line (don't forget the ampersand)
-
-fastqc &
-```
-
-That will open FastQC and you will be able to open the fastq files directly with the program. If you prefer to use the command-line (recommended) do the following:
-
-##### Command-line -  option 2:
-
 ```sh  
-#Run FastQC on both files and wait till it's done running
+
+# Run FastQC on both files and wait till it's done running
 fastqc SRR6170103_1.fastq.gz SRR6170103_2.fastq.gz      
 
 # Keep it tidy by moving the resulting files to the FastQC folder we created at the beginning
-mv *.zip *.html ~/storage/mapping/FastQC         
+mv *.zip *.html ~/data/mapping/fastq/SRR6170103/FastQC
 
 # Go to the FastQC folder
-cd ~/storage/mapping/FastQC
+cd ~/data/mapping/fastq/SRR6170103/FastQC
 ``` 
 
 :information_source: **Reminder:** You can always check where you are in the terminal using `pwd` - you should be at `~/storage/mapping/FastQC`
@@ -163,19 +150,13 @@ cd ~/storage/mapping/FastQC
 
 #### 2) Open the FastQC results with your favorite html visualizer (i.e firefox, chrome, etc.) or if you prefer it, you can open the file through your GUI by directly clicking on it.
 
-Because we are using Docker, please go to your local "storage" directory in your computer, it should be where you are running your Docker image. It would be named `mapping` click on it and go to the FastQC directory, then open the .html files with chrome or firefox.
-
-Note: Normally you could just do (skip this if on Docker):
-```sh 
-firefox SRR6170103_1_fastqc.html
-```
+Because we are using Docker, please go to your local "data" directory on your computer, it should be where you are running your Docker image. It would be named `mapping` click on it and go to the FastQC directory, then open the .html files with chrome or firefox.
 
 - Once you manage opening the files, you should be able to see the following:
   
 ![alt text](https://github.com/carlalbc/BIO694_2018/blob/master/img/fastqc_report1.png)
 
 Pretty good quality reads! :heavy_check_mark: :octocat:
-
 
 - :information_source: Sometimes you can get very **bad** quality reads. See the example below:
 
@@ -343,7 +324,7 @@ NOTE: Exit the fastq folder using `cd ..` until you get to your main directory
 Go to the main folder (we called it mapping) and download the files.
 
 ```
-cd ~/storage/mapping
+cd ~/data/mapping
 wget ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/005/845/GCF_000005845.2_ASM584v2/GCF_000005845.2_ASM584v2_genomic.fna.gz
 wget ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/005/845/GCF_000005845.2_ASM584v2/GCF_000005845.2_ASM584v2_genomic.gff.gz
 gunzip *
