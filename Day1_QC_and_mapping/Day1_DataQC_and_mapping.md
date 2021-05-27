@@ -214,7 +214,18 @@ The parameters used for Trimmomatic are defined as follows:
 - Then run Trimmomatic:
 ```sh
 # Trimming and removing Illumina adapters
-java -jar /usr/share/java/trimmomatic.jar PE -phred33  SRR6170103_1.fastq.gz SRR6170103_2.fastq.gz SRR6170103_1_paired.fastq.gz SRR6170103_1_unpaired.fastq.gz SRR6170103_2_paired.fastq.gz SRR6170103_2_unpaired.fastq.gz ILLUMINACLIP:TruSeq3-PE.fa:2:30:10 LEADING:3 TRAILING:3 SLIDINGWINDOW:4:15 MINLEN:36
+trimmomatic PE -phred33 \
+            SRR6170103_1.fastq.gz \
+            SRR6170103_2.fastq.gz \
+            SRR6170103_1_paired.fastq.gz \
+            SRR6170103_1_unpaired.fastq.gz \
+            SRR6170103_2_paired.fastq.gz \
+            SRR6170103_2_unpaired.fastq.gz \
+            ILLUMINACLIP:TruSeq3-PE.fa:2:30:10 \
+            LEADING:3 \
+            TRAILING:3 \
+            SLIDINGWINDOW:4:15 \
+            MINLEN:36
 ```
 
 ### :beginner: Questions: 
@@ -230,8 +241,19 @@ java -jar /usr/share/java/trimmomatic.jar PE -phred33  SRR6170103_1.fastq.gz SRR
 Next, we can remove low quality reads of the sequences by trimming the bases at the 3' end of the reads with the following command:
 
 ```sh
-#Filtering low quality reads
-java -jar /usr/share/java/trimmomatic.jar PE -phred33 -threads 1 -trimlog logfile2 SRR6170103_1_paired.fastq.gz SRR6170103_2_paired.fastq.gz SRR6170103_1_trim_paired.fastq SRR6170103_1_unpaired.fastq SRR6170103_2_trim_paired.fastq SRR6170103_2_trim_unpaired.fastq SLIDINGWINDOW:4:15 LEADING:3 TRAILING:3 MINLEN:36
+# Download Illumina adapters
+wget https://raw.githubusercontent.com/timflutre/trimmomatic/master/adapters/TruSeq3-PE.fa
+
+# Filtering low quality reads
+trimmomatic PE -phred33 -threads 1 -trimlog logfile2 SRR6170103_1_paired.fastq.gz \
+            SRR6170103_2_paired.fastq.gz \
+            SRR6170103_1_trim_paired.fastq \
+            SRR6170103_1_unpaired.fastq \
+            SRR6170103_2_trim_paired.fastq \
+            SRR6170103_2_trim_unpaired.fastq \
+            SLIDINGWINDOW:4:15 LEADING:3 \
+            TRAILING:3 \
+            MINLEN:36
 ```
 
 ### :beginner: Questions:
@@ -246,9 +268,9 @@ java -jar /usr/share/java/trimmomatic.jar PE -phred33 -threads 1 -trimlog logfil
 :diamond_shape_with_a_dot_inside: If not installed already, download SOAPec
 
 ```sh
-#Go to (if not there):
-cd ~/storage/mapping/fastq/SRR6170103/
-#Make directory
+# Go to (if not there):
+cd ~/data/mapping/fastq/SRR6170103/
+# Make directory
 mkdir software
 # Get SOAPec & Picard (we will use this one later)
 wget http://sourceforge.net/projects/soapdenovo2/files/ErrorCorrection/SOAPec_v2.01.tar.gz -P software
